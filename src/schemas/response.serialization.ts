@@ -2,23 +2,27 @@
 
 import { FastifySchema } from "fastify";
 
-export const responseSerialization: FastifySchema["response"] = {
-  default: {
-    type: "object",
-    properties: {
-      code: { type: "number" },
-      message: { type: "string" },
+export const responseSerialization = (
+  dataKeyName: string,
+): FastifySchema["response"] => {
+  return {
+    default: {
+      type: "object",
+      properties: {
+        code: { type: "number" },
+        message: { type: "string" },
+      },
+      required: ["message"],
     },
-    required: ["message"],
-  },
-  "2xx": {
-    type: "object",
-    properties: {
-      code: { type: "number", default: 200 },
-      message: { type: "string", default: "success" },
-      data: { type: ["array", "object", "string", "number"] },
-      count: { type: "number" },
+    "2xx": {
+      type: "object",
+      properties: {
+        code: { type: "number", default: 200 },
+        message: { type: "string", default: "success" },
+        [dataKeyName]: { type: ["array", "object", "string", "number"] },
+        count: { type: "number", default: 1 },
+      },
+      required: [dataKeyName],
     },
-    required: ["data"],
-  },
+  };
 };
