@@ -4,6 +4,7 @@ import { FastifySchema } from "fastify";
 
 export const responseSerialization = (
   dataKeyName: string,
+  type?: string,
 ): FastifySchema["response"] => {
   return {
     default: {
@@ -19,7 +20,9 @@ export const responseSerialization = (
       properties: {
         code: { type: "number", default: 200 },
         message: { type: "string", default: "success" },
-        [dataKeyName]: { type: ["array", "object", "string", "number"] },
+        [dataKeyName]: {
+          type: type || ["array", "object", "string", "number"],
+        },
         count: { type: "number", default: 1 },
       },
       required: [dataKeyName],

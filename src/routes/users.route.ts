@@ -8,12 +8,12 @@ export const userRoute = async (fastify: FastifyInstance) => {
   fastify.get(
     "/api/users",
     {
-      // preHandler: bearerAuth,
+      preHandler: bearerAuth,
       schema: {
         querystring: listValidation,
-        response: responseSerialization("users"),
+        response: responseSerialization("users", "array"),
       },
     },
     list,
-  ); // protected route
+  );
 };
