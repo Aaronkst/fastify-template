@@ -1,5 +1,15 @@
 # Fastify Boilerplate
 
+## Usage
+```bash
+# ignore commit history
+git clone --depth 1 -b main
+
+# replace origin remote
+git remove origin
+git add origin <your-repo-link>
+```
+
 ## Quick Start
 ```bash
 # install packages
