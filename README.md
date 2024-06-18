@@ -1,9 +1,13 @@
 # Fastify Boilerplate
 
+-- Edit Me
+
+This boilerplate uses prisma as an ORM
+
 ## Usage
 ```bash
 # ignore commit history
-git clone --depth 1 -b main
+git clone --depth 1 -b prisma
 
 # replace origin remote
 git remove origin
