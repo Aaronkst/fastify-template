@@ -1,5 +1,9 @@
 # Fastify Boilerplate
 
+-- Edit Me
+
+This boilerplate uses mongoose as an ORM
+
 ## Usage
 ```bash
 # ignore commit history
