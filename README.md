@@ -7,7 +7,7 @@ This boilerplate uses mongoose as an ORM
 ## Usage
 ```bash
 # ignore commit history
-git clone --depth 1 -b main
+git clone --depth 1 -b mongoose
 
 # replace origin remote
 git remove origin
