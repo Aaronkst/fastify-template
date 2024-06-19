@@ -5,7 +5,7 @@ import { JsonSchemaToTsProvider } from "@fastify/type-provider-json-schema-to-ts
 // PLUGINS
 import { fastifyCors } from "@fastify/cors";
 import fastifyFormbody from "@fastify/formbody";
-import { prismaPlugin } from "./plugins";
+import { bullmqPlugin, prismaPlugin } from "./plugins";
 
 // ROUTES
 import { homeRoute } from "./routes/home.route";
@@ -45,9 +45,20 @@ export const bootstrapServer = async (): Promise<FastifyInstance> => {
 
     // database and other necessary services registration
     await server.register(prismaPlugin);
+
+    // Use this plugin for redis mq
+    // await server.register(bullmqPlugin, {
+    //   name: "QueueName",
+    // });
+
     await server.register(fastifyHelmet);
     await server.register(fastifyCors, {
-      allowedHeaders: ["Authorization"],
+      allowedHeaders: [
+        "Accept",
+        "Authorization",
+        "Content-Type",
+        "If-None-Match",
+      ], // default allowed headers
     });
     await server.register(fastifyFormbody);
 

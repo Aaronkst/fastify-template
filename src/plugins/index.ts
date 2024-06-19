@@ -1,3 +1,4 @@
 import prismaPlugin from "./prisma";
+import bullmqPlugin from "./mq";
 
-export { prismaPlugin };
+export { prismaPlugin, bullmqPlugin };

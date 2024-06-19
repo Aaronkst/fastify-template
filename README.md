@@ -30,6 +30,14 @@ NODE_ENV=production
 yarn start
 ```
 
+## Customization
+See `app.ts` to customize the services being used in this server.
+
+- Prisma DB Orm (decorates `FastifyInstance` with `prisma` connection)
+- Mq (decorates `FastifyInstance` with `mq` object that maps queue names to `Queue` objects)
+
+Edit the necessary files under `src/plugin` directory to meet your needs.
+
 ## Structure
 `/routes` - The api routes\
 `/controllers` - The business logics to attach to the api routes\
