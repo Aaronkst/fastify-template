@@ -3,9 +3,9 @@ import * as dotenv from "dotenv";
 import { JsonSchemaToTsProvider } from "@fastify/type-provider-json-schema-to-ts";
 
 // PLUGINS
-import { connectDb } from "./plugins/db";
 import { fastifyCors } from "@fastify/cors";
 import fastifyFormbody from "@fastify/formbody";
+import { prismaPlugin } from "./plugins";
 
 // ROUTES
 import { homeRoute } from "./routes/home.route";
@@ -42,8 +42,9 @@ export const bootstrapServer = async (): Promise<FastifyInstance> => {
     dotenv.configDotenv({
       path: envFilePath,
     });
+
     // database and other necessary services registration
-    await connectDb(server);
+    await server.register(prismaPlugin);
     await server.register(fastifyHelmet);
     await server.register(fastifyCors, {
       allowedHeaders: ["Authorization"],

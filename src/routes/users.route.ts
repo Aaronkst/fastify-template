@@ -14,6 +14,6 @@ export const userRoute = async (fastify: FastifyInstance) => {
         response: responseSerialization("users", "array"),
       },
     },
-    list,
+    list.bind(fastify),
   );
 };

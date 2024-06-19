@@ -1,0 +1,26 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("PGURI")
+}
+
+model User {
+  id    String @id @default(uuid())
+  name  String
+  email String @unique
+  Auth  Auth?
+
+  @@index([email])
+}
+
+model Auth {
+  id       String @id @default(uuid())
+  user     User   @relation(fields: [user_id], references: [id])
+  user_id  String @unique // relation scalar field (used in the `@relation` attribute above)
+  password String
+
+  @@index([user_id])
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
