@@ -1,11 +1,11 @@
 import { FastifyInstance } from "fastify";
 import mongoose from "mongoose";
 
-export const connectDb = async (fastify: FastifyInstance) => {
+export default async function connectDb(fastify: FastifyInstance) {
   try {
-    const mongoConnection = await mongoose.connect(process.env.MONGOURI!);
+    await mongoose.connect(process.env.MONGOURI!);
     fastify.log.info("mongoose connected");
   } catch (e) {
     fastify.log.error("mongoose err", e);
   }
-};
+}

@@ -3,7 +3,7 @@ import * as dotenv from "dotenv";
 import { JsonSchemaToTsProvider } from "@fastify/type-provider-json-schema-to-ts";
 
 // PLUGINS
-import { connectDb } from "./plugins/db";
+import { connectDb, bullmqPlugin } from "./plugins";
 import { fastifyCors } from "@fastify/cors";
 import fastifyFormbody from "@fastify/formbody";
 
@@ -44,6 +44,12 @@ export const bootstrapServer = async (): Promise<FastifyInstance> => {
     });
     // database and other necessary services registration
     await connectDb(server);
+
+    // Use this plugin for redis mq
+    // await server.register(bullmqPlugin, {
+    //   name: "QueueName",
+    // });
+
     await server.register(fastifyHelmet);
     await server.register(fastifyCors, {
       allowedHeaders: ["Authorization"],
